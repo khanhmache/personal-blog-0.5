@@ -29,18 +29,15 @@ jobs:
 
       - name: Test Nginx configuration
         run: |
-          docker run --rm -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf:ro nginx:alpine nginx -t
+          echo "Testing Nginx config..."
+          docker run --rm \
+            -v ${{ github.workspace }}/nginx/nginx.conf:/etc/nginx/nginx.conf:ro \
+            nginx:alpine nginx -t
 
-      - name: Run healthcheck test
-        run: |
-          echo "✅ Docker image built successfully!"
-          echo "✅ Nginx config syntax is valid!"
-          echo "🚀 Project is ready for deployment"
-
-      - name: Show summary
+      - name: Summary
         run: |
           echo "========================================"
-          echo "🎉 CI/CD Pipeline completed successfully!"
+          echo "✅ CI/CD Pipeline completed successfully!"
           echo "Project: Personal Blog Level 0.5"
-          echo "Status: Build & Test Passed"
+          echo "Build + Nginx test: PASSED"
           echo "========================================"
